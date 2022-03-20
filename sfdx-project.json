@@ -1,0 +1,12 @@
+{
+  "packageDirectories": [
+    {
+      "path": "fxp-app",
+      "default": true
+    }
+  ],
+  "name": "force-xp",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "53.0"
+}
