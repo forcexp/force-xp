@@ -1,0 +1,15 @@
+<template>
+	<div>
+		<lightning-button label="with Sharing" onclick={handleWithSharingClick}></lightning-button>
+		<lightning-button label="without Sharing" onclick={handleWithoutSharingClick}></lightning-button>
+	</div>
+	<lightning-card title={title} class="slds-m-top_small">
+		<div class="slds-card__body slds-card__body_inner">
+			<ul>
+				<template iterator:expense={expenses}>
+					<li key={expense.value.Id}>{expense.value.Id}, {expense.value.TransactionDate}, {expense.value.Amount}</li>
+				</template>
+			</ul>
+		</div>
+	</lightning-card>
+</template>

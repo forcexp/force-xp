@@ -3,6 +3,10 @@
     {
       "path": "fxp-app",
       "default": true
+    },
+    {
+      "path": "fake-app",
+      "default": false
     }
   ],
   "name": "force-xp",
