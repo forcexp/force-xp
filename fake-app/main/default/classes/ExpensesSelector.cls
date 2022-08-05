@@ -8,19 +8,19 @@ public abstract class ExpensesSelector {
 
 	public static ExpensesSelector withSharingInstance {
 		get {
-			return (ExpensesSelector)DependencyInjector.i.instanceFor(ExpensesSelector.class);
+			return (ExpensesSelector)InstancesSource.i.instanceFor(ExpensesSelector.class);
 		}
 	}
 
 	public static ExpensesSelector withoutSharingInstance {
 		get {
-			return (ExpensesSelector)DependencyInjector.withoutSharingInstance.instanceFor(ExpensesSelector.class);
+			return (ExpensesSelector)InstancesSource.i.withoutSharingInstanceFor(ExpensesSelector.class);
 		}
 	}
 
 	public static ExpensesSelector inheritedSharingInstance {
 		get {
-			return (ExpensesSelector)DependencyInjector.inheritedSharingInstance.instanceFor(ExpensesSelector.class);
+			return (ExpensesSelector)InstancesSource.i.inheritedSharingInstanceFor(ExpensesSelector.class);
 		}
 	}
 

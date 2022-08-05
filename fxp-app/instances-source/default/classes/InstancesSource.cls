@@ -22,7 +22,7 @@ public with sharing class InstancesSource {
 		private set;
 	}
 
-	private  InstancesSource() {
+	private InstancesSource() {
 	}
 
 	InstanceManager withSharingInstances {
@@ -155,9 +155,26 @@ public with sharing class InstancesSource {
 		}
 	}
 
+	/*
+	* @description InstanceTypeProvider is an abstract class that must be extended in order to create
+	* InstanceTypeProvider classes.
+	* InstanceTypeProvider classes are classes responsible to provide the Type to create instances of
+	* a specific contract type.
+	*/
 	abstract class InstanceTypeProvider {
 		Map<Type, Type> instanceTypeByContract = new Map<Type, Type>();
 
+		/*
+		* @description `setInstanceTypeFor` allows to specify what Type must be used in order to create
+		* instances of a specific contract type.
+		* @param `contractType` specifies for what Contract Type the `newInstanceType` has to be returned.
+		* @param `newInstanceType` specifies the Type that has to be returned when the Instance Type is
+		* requested for the `contractType` passed as param during the `setInstanceTypeFor` call.
+		* @return The Type that must be used in order to create instances for the `contractType`.
+		* Expected Exceptions:
+		* InstanceTypeAlreadyDefinedException: happens when setInstanceTypeFor is executed with a
+		* contractType that already has an InstanceType defined.
+		*/
 		public void setInstanceTypeFor(Type contractType, Type newInstanceType) {
 			Type instanceType = instanceTypeByContract.get(contractType);
 			if (instanceType != null) {
@@ -167,6 +184,9 @@ public with sharing class InstancesSource {
 			instanceTypeByContract.put(contractType, newInstanceType);
 		}
 
+		/*
+		*
+		*/
 		public Type instanceTypeFor(Type contractType) {
 			Type instanceType = instanceTypeByContract.get(contractType);
 
