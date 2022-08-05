@@ -7,7 +7,7 @@ public abstract class Collection {
 
 	protected Collection(List<Object> objects) {
 		new NullArgumentBlocker().forArgument(objects).throwExceptionIfAnyHasIssues();
-		this.collectionObjects = new List<Object>(objects);
+		this.privateItems = new List<Object>(objects);
 	}
 
 	public Boolean areMany {
@@ -40,8 +40,30 @@ public abstract class Collection {
 		}
 	}
 
+	public virtual Objects asObjects() {
+		return new Objects(items);
+	}
+
+	protected List<Object> items {
+		get {
+			return itemsGetterResult();
+		}
+	}
+
+	protected Set<Object> itemsAsSet {
+		get {
+			return itemsAsSetGetterResult();
+		}
+	}
+
+	protected Object item {
+		get {
+			return itemGetterResult();
+		}
+	}
+
 	protected virtual Boolean areManyGetterResult() {
-		return collectionObjects.size() > 1;
+		return privateItems.size() > 1;
 	}
 
 	protected virtual Boolean areNotManyGetterResult() {
@@ -49,7 +71,7 @@ public abstract class Collection {
 	}
 
 	protected virtual Boolean isJustOneGetterResult() {
-		return collectionObjects.size() == 1;
+		return privateItems.size() == 1;
 	}
 
 	protected virtual Boolean isNotJustOneGetterResult() {
@@ -57,14 +79,32 @@ public abstract class Collection {
 	}
 
 	protected virtual Integer sizeGetterResult() {
-		return collectionObjects.size();
+		return privateItems.size();
 	}
 
-	List<Object> collectionObjects;
+	protected virtual List<Object> itemsGetterResult() {
+		return new List<Object>(privateItems);
+	}
 
-	protected List<Object> objects {
-		get {
-			return new List<Object>(collectionObjects);
+	protected virtual Set<Object> itemsAsSetGetterResult() {
+		return new Set<Object>(privateItems);
+	}
+
+	protected virtual Object itemGetterResult() {
+		abortGetItemWhenCollectionHasManyItems();
+		return privateItems[0];
+	}
+
+	List<Object> privateItems;
+
+	void abortGetItemWhenCollectionHasManyItems() {
+		if (areMany) {
+			throw new InvalidOperationOnCollectionWithManyItemsException(
+				'Can use <this>.item on a Collection with many items.'
+			);
 		}
 	}
+
+	class InvalidOperationOnCollectionWithManyItemsException extends InvalidOperationException { }
+
 }
