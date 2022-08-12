@@ -56,76 +56,80 @@ public with sharing class InstancesSource {
 	}
 
 	public Object instanceFor(Type contractType) {
-		proceedIfContractTypeHasValue(contractType);
+		// proceedIfContractTypeHasValue(contractType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.throwExceptionIfAnyHasIssues();
 
 		return withSharingInstances.instanceFor(contractType);
 	}
 
 	public Object newInstanceFor(Type contractType) {
-		proceedIfContractTypeHasValue(contractType);
+		// proceedIfContractTypeHasValue(contractType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.throwExceptionIfAnyHasIssues();
 
 		return withSharingInstances.newInstanceFor(contractType);
 	}
 
 	public void setWithSharingInstanceTypeFor(Type contractType, Type withSharingInstanceType) {
-		proceedIfContractTypeHasValue(contractType);
-		proceedIfWithSharingInstanceTypeHasValue(withSharingInstanceType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.forArgument(withSharingInstanceType)
+				.throwExceptionIfAnyHasIssues();
 
 		withSharingInstances.setInstanceTypeFor(contractType, withSharingInstanceType);
 	}
 
 	public Object withoutSharingInstanceFor(Type contractType) {
-		proceedIfContractTypeHasValue(contractType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.throwExceptionIfAnyHasIssues();
 
 		return withoutSharingInstances.instanceFor(contractType);
 	}
 
 	public Object newWithoutSharingInstanceFor(Type contractType) {
-		proceedIfContractTypeHasValue(contractType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.throwExceptionIfAnyHasIssues();
 
 		return withoutSharingInstances.newInstanceFor(contractType);
 	}
 
 	public void setWithoutSharingInstanceTypeFor(Type contractType, Type withoutSharingInstanceType) {
-		proceedIfContractTypeHasValue(contractType);
-		proceedIfWithoutSharingInstanceTypeHasValue(withoutSharingInstanceType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.forArgument(withoutSharingInstanceType)
+				.throwExceptionIfAnyHasIssues();
 
 		withoutSharingInstances.setInstanceTypeFor(contractType, withoutSharingInstanceType);
 	}
 
 	public Object inheritedSharingInstanceFor(Type contractType) {
-		proceedIfContractTypeHasValue(contractType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.throwExceptionIfAnyHasIssues();
 
 		return inheritedSharingInstances.instanceFor(contractType);
 	}
 
 	public Object newInheritedSharingInstanceFor(Type contractType) {
-		proceedIfContractTypeHasValue(contractType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.throwExceptionIfAnyHasIssues();
 
 		return inheritedSharingInstances.newInstanceFor(contractType);
 	}
 
 	public void setInheritedSharingInstanceTypeFor(Type contractType, Type inheritedSharingInstanceType) {
-		proceedIfContractTypeHasValue(contractType);
-		proceedIfInheritedSharingInstanceTypeHasValue(inheritedSharingInstanceType);
+		new NullArgumentBlocker()
+				.forArgument(contractType)
+				.forArgument(inheritedSharingInstanceType)
+				.throwExceptionIfAnyHasIssues();
 
 		inheritedSharingInstances.setInstanceTypeFor(contractType, inheritedSharingInstanceType);
-	}
-
-	private void proceedIfContractTypeHasValue(Type contractType) {
-		Arguments.i.proceedIfItHasValue(contractType, 'contractType');
-	}
-
-	private void proceedIfWithSharingInstanceTypeHasValue(Type withSharingInstanceType) {
-		Arguments.i.proceedIfItHasValue(withSharingInstanceType, 'withSharingInstanceType');
-	}
-
-	private void proceedIfWithoutSharingInstanceTypeHasValue(Type withoutSharingInstanceType) {
-		Arguments.i.proceedIfItHasValue(withoutSharingInstanceType, 'withoutSharingInstanceType');
-	}
-
-	private void proceedIfInheritedSharingInstanceTypeHasValue(Type inheritedSharingInstanceType) {
-		Arguments.i.proceedIfItHasValue(inheritedSharingInstanceType, 'inheritedSharingInstanceType');
 	}
 
 	class InstanceProvider {
