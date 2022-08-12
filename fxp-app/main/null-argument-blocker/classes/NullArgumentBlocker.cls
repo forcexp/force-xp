@@ -1,3 +1,12 @@
+/**
+ * @description: NullArgumentBlocker is desgined to help developers to
+ * abort the execution of the code whenever a null value is passed as argument
+ * to a public, protected or global method. For private methods, developers
+ * should be able to avoid the injection of null values by designing the class
+ * in a way where null values are not passed into these private methods.
+ * NullArgumentBlocker process empty and whitespaced Strings as null values.
+ * NullArgumentBlocker also finds null values inside lists.
+ */
 public with sharing class NullArgumentBlocker {
 	public Validator forArgument(Object argumentValue) {
 		validator.forArgument(argumentValue);
