@@ -4,23 +4,23 @@
  */
 public class Objects extends Collection {
 	public Objects(Object value) {
-		super(new List<Object>{value});
+		this(new List<Object>{value});
 	}
 
 	public Objects(Object value1,Object value2) {
-		super(new List<Object>{value1, value2});
+		this(new List<Object>{value1, value2});
 	}
 
 	public Objects(Object value1,Object value2, Object value3) {
-		super(new List<Object>{value1, value2, value3});
+		this(new List<Object>{value1, value2, value3});
 	}
 
 	public Objects(List<Object> values) {
-		super(values);
+		super(values, new MetaOperations());
 	}
 
 	public Objects(Set<Object> values) {
-		super(new List<Object>(values));
+		this(new List<Object>(values));
 	}
 
 	public List<Object> asList() {
@@ -33,5 +33,16 @@ public class Objects extends Collection {
 
 	public Object item() {
 		return item;
+	}
+
+	class MetaOperations extends Collection.MetaOperations {
+
+		public override Type listType() {
+			return List<Object>.class;
+		}
+
+		public override Object newCollection(List<Object> items) {
+			return new Objects(items);
+		}
 	}
 }

@@ -7,7 +7,7 @@
  * NullArgumentBlocker process empty and whitespaced Strings as null values.
  * NullArgumentBlocker also finds null values inside lists.
  */
-public with sharing class NullArgumentBlocker {
+public class NullArgumentBlocker {
 	public Validator forArgument(Object argumentValue) {
 		validator.forArgument(argumentValue);
 		return validator;

@@ -5,9 +5,14 @@
  */
 public abstract class Collection {
 
-	protected Collection(List<Object> objects) {
-		new NullArgumentBlocker().forArgument(objects).throwExceptionIfAnyHasIssues();
-		this.privateItems = new List<Object>(objects);
+	protected Collection(List<Object> objects, MetaOperations metaOperations) {
+		new NullArgumentBlocker()
+				.forArgument(objects)
+				.forArgument(metaOperations)
+				.throwExceptionIfAnyHasIssues();
+		privateItems = new List<Object>(objects);
+		privateMetaOperations = metaOperations;
+		privateMetaOperations.collection = this;
 	}
 
 	public Boolean areMany {
@@ -44,6 +49,42 @@ public abstract class Collection {
 		return new Objects(items);
 	}
 
+	public abstract class MetaOperations {
+		Collection collection;
+
+		public abstract Type listType();
+
+		public abstract Object newCollection(List<Object> items);
+
+		public List<Object> newEmptyTypedList() {
+			return (List<Object>)listType().newInstance();
+		}
+
+		public List<Object> itemsAsNewTypedList() {
+			List<Object> items = newEmptyTypedList();
+
+			for(Object item: collection.privateItems) {
+				items.add(item);
+			}
+
+			return items;
+		}
+
+		public Object mapCollection(ItemMapper mapper) {
+			List<Object> mappedItems = newEmptyTypedList();
+
+			for(Object item: collection.privateItems) {
+				mappedItems.add(mapper.mapItem(item));
+			}
+
+			return newCollection(mappedItems);
+		}
+	}
+
+	public abstract class ItemMapper {
+		public abstract Object mapItem(Object item);
+	}
+
 	protected List<Object> items {
 		get {
 			return itemsGetterResult();
@@ -59,6 +100,12 @@ public abstract class Collection {
 	protected Object item {
 		get {
 			return itemGetterResult();
+		}
+	}
+
+	protected MetaOperations operations {
+		get {
+			return privateMetaOperations;
 		}
 	}
 
@@ -83,7 +130,7 @@ public abstract class Collection {
 	}
 
 	protected virtual List<Object> itemsGetterResult() {
-		return new List<Object>(privateItems);
+		return operations.itemsAsNewTypedList();
 	}
 
 	protected virtual Set<Object> itemsAsSetGetterResult() {
@@ -95,7 +142,10 @@ public abstract class Collection {
 		return privateItems[0];
 	}
 
+	//protected abstract Object mapCollection(ItemMapper mapper);
+
 	List<Object> privateItems;
+	MetaOperations privateMetaOperations;
 
 	void abortGetItemWhenCollectionHasManyItems() {
 		if (areMany) {
