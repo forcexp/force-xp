@@ -22,7 +22,7 @@ public with sharing class InstancesSource {
 		private set;
 	}
 
-	private  InstancesSource() {
+	private InstancesSource() {
 	}
 
 	InstanceManager withSharingInstances {
@@ -159,10 +159,12 @@ public with sharing class InstancesSource {
 		Map<Type, Type> instanceTypeByContract = new Map<Type, Type>();
 
 		public void setInstanceTypeFor(Type contractType, Type newInstanceType) {
+			// --- remove this part that forbid the the type be redefined once it's set
 			Type instanceType = instanceTypeByContract.get(contractType);
 			if (instanceType != null) {
 				throw new InstanceTypeAlreadyDefinedException(contractType, instanceType, newInstanceType);
 			}
+			// ---
 
 			instanceTypeByContract.put(contractType, newInstanceType);
 		}
@@ -170,12 +172,13 @@ public with sharing class InstancesSource {
 		public Type instanceTypeFor(Type contractType) {
 			Type instanceType = instanceTypeByContract.get(contractType);
 
-			if (instanceType == null) {
-				instanceType = defaultInstanceTypeFor(contractType);
-				instanceTypeByContract.put(contractType, instanceType);
+			if (instanceType != null) {
+				return instanceType = defaultInstanceTypeFor(contractType);
 			}
 
-			return instanceType;
+			// get metadata from CustomMetadata
+
+			return defaultInstanceTypeFor(contractType);
 		}
 
 		Type defaultInstanceTypeFor(Type contractType) {

@@ -17,7 +17,7 @@ public abstract class StringArguments {
 		private set;
 	}
 
-	public virtual void proceedIfItHasValue(Object argumentValue, String argumentName) {
+	public virtual void proceedIfItHasValue(String argumentValue, String argumentName) {
 		throw NotImplementedException.newInstance();
 	}
 
@@ -25,7 +25,7 @@ public abstract class StringArguments {
 			extends StringArguments {
 
 		public override void proceedIfItHasValue(String argumentValue, String argumentName) {
-			if (String.isBlank(argumentValue == null)) {
+			if (String.isBlank(argumentValue)) {
 				throw new IllegalArgumentException('ArgumentNull: "' + argumentName + '" argument cannot be null.');
 			}
 		}
