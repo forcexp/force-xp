@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Builder_Type_Is_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT( BuilderToUse__c ) = &quot;Custom&quot;,
+ISBLANK( CustomBuilderType__c )
+)</errorConditionFormula>
+    <errorMessage>Custom Builder Type cannot be blank when Custom Builder is selected.</errorMessage>
+</ValidationRule>

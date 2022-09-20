@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BuilderToUse__c</fullName>
+    <defaultValue>&quot;Standard&quot;</defaultValue>
+    <description>The Standard Builder tries to create an instance of the Instance Type by calling its parameterless constructor. When a more sophisticated build process is required, a Builder class can be specified to create the instance of the Instance Type.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Specifies what builder to use: the standard builder or a custom builder.</inlineHelpText>
+    <label>Builder To Use</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Standard</fullName>
+                <default>true</default>
+                <label>Standard</label>
+            </value>
+            <value>
+                <fullName>Custom</fullName>
+                <default>false</default>
+                <label>Custom</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

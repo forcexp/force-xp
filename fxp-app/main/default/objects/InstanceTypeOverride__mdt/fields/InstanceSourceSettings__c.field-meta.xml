@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InstanceSourceSettings__c</fullName>
+    <description>Instance Source Settings the Instance Source Override applies to.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Instance Source Settings</label>
+    <referenceTo>InstanceSourceSettings__mdt</referenceTo>
+    <relationshipLabel>Instance Type Overrides</relationshipLabel>
+    <relationshipName>InstanceTypeOverrides</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

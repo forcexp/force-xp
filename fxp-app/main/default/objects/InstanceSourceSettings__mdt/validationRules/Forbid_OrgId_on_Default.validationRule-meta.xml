@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forbid_OrgId_on_Default</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+IsDefault__c,
+NOT(ISBLANK(OrganizationId__c))
+)</errorConditionFormula>
+    <errorMessage>Organization Id is not allowed on Default Settings.</errorMessage>
+</ValidationRule>

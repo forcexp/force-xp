@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Instance_Type_Override_Is_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT( BuilderToUse__c ) = &quot;Standard&quot;,
+ISBLANK( InstanceTypeName__c )
+)</errorConditionFormula>
+    <errorMessage>Instance Type Name cannot be blank when Standard Builder is selected.</errorMessage>
+</ValidationRule>
