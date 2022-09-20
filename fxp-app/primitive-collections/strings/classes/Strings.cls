@@ -43,6 +43,11 @@ public class Strings extends Collection {
 	 */
 	public Strings abbreviate(Integer maxWidth) {
 		// FIXME throw exception if maxWidth is null or less than 4
+		//new Verifier()
+		//	.forValue(maxWidth)
+		//	.allow(Integers.GreatherThanOrEqualTo(4))
+		//	.prevent(Integers.LessThan(4))
+		//	.verify();
 		return (Strings)operations.mapCollection(new AbbreviateItemsMapper(maxWidth));
 	}
 
