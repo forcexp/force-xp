@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RequiredPermissions__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The Override will be applied to users who has all permissions listed in this field. When this field is blank, the override applies to all users, regardless their permissions.</inlineHelpText>
+    <label>Required Permissions</label>
+    <required>false</required>
+    <type>TextArea</type>
+</CustomField>
