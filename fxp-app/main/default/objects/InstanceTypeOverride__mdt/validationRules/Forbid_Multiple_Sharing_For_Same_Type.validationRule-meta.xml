@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forbid_Multiple_Sharing_For_Same_Type</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  IsActive__c,
+  TEXT(BuilderToUse__c) = &quot;Standard&quot;,
+  AND(
+    OverrideWithSharingImplementation__c,
+    OR(
+      OverrideWithoutSharingImplementation__c,
+      OverrideInheritedSharingImplementation__c
+    )
+  ),
+  AND(
+    OverrideWithoutSharingImplementation__c,
+    OR(
+      OverrideWithSharingImplementation__c,
+      OverrideInheritedSharingImplementation__c
+    )
+  ),
+  AND(
+    OverrideInheritedSharingImplementation__c,
+    OR(
+      OverrideWithSharingImplementation__c,
+      OverrideWithoutSharingImplementation__c
+    )
+  )
+
+)</errorConditionFormula>
+    <errorMessage>More than one Override Implementation Option cannot be selected when the Standard Instance Builder is selected.</errorMessage>
+</ValidationRule>
