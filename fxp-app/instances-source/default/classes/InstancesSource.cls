@@ -159,13 +159,6 @@ public with sharing class InstancesSource {
 		Map<Type, Type> instanceTypeByContract = new Map<Type, Type>();
 
 		public void setInstanceTypeFor(Type contractType, Type newInstanceType) {
-			// --- remove this part that forbid the the type be redefined once it's set
-			Type instanceType = instanceTypeByContract.get(contractType);
-			if (instanceType != null) {
-				throw new InstanceTypeAlreadyDefinedException(contractType, instanceType, newInstanceType);
-			}
-			// ---
-
 			instanceTypeByContract.put(contractType, newInstanceType);
 		}
 
@@ -173,7 +166,7 @@ public with sharing class InstancesSource {
 			Type instanceType = instanceTypeByContract.get(contractType);
 
 			if (instanceType != null) {
-				return instanceType = defaultInstanceTypeFor(contractType);
+				return instanceType;
 			}
 
 			// get metadata from CustomMetadata
@@ -246,39 +239,6 @@ public with sharing class InstancesSource {
 	public abstract class InstancesSourceException
 			extends CustomException { }
 
-
-	public class InstanceTypeAlreadyDefinedException
-			extends InstancesSourceException {
-
-		public Type contractType {
-			get;
-			private set;
-		}
-
-		public Type instanceType {
-			get;
-			private set;
-		}
-
-		public Type newInstanceType {
-			get;
-			private set;
-		}
-
-		InstanceTypeAlreadyDefinedException(Type contractType, Type instanceType, Type newInstanceType) {
-			this(String.format(
-				'Class "{0}" cannot be set as instance type becasuse class "{1}" is already set as instance type for "{2}" contract type.',
-				new List<String> {
-					newInstanceType.getName(),
-					instanceType.getName(),
-					contractType.getName()
-				}
-			));
-			this.contractType = contractType;
-			this.instanceType = instanceType;
-			this.newInstanceType = newInstanceType;
-		}
-	}
 
 	public class DefaultInstanceTypeNotFoundException
 			extends InstancesSourceException {

@@ -459,7 +459,11 @@ public class InstancesSourceTest {
 		Test.stopTest();
 
 		System.assertNotEquals(null, messageProvider, 'messageProvider should not be null.');
-		System.assert(messageProvider instanceOf DiMessageProvider.SomeOtherImplementation, 'messageProvider should be an instance of DiMessageProvider.SomeOtherImplementation class.');
+		System.assert(
+			messageProvider instanceOf DiMessageProvider.SomeOtherImplementation,
+			'messageProvider should be an instance of DiMessageProvider.SomeOtherImplementation class instead of '
+			+ String.valueOf(messageProvider) + '.'
+		);
 	}
 
 	@IsTest
@@ -487,33 +491,6 @@ public class InstancesSourceTest {
 		System.assertEquals(expectedDefaultInstanceTypeName, typedException.defaultInstanceTypeName, 'defaultInstanceTypeName should have the expected value.');
 	}
 
-	@IsTest
-	static void itShoulFailOnSettingWithSharingInstanceType() {
-		InstancesSource di = InstancesSource.i;
-		Type expectedContractType = DiMessageProvider.class;
-		Type expectedInstanceType = DiMessageProvider.WithSharingImplementation.class;
-		Type expectedNewInstanceType = DiMessageProvider.SomeOtherImplementation.class;
-		Exception caughtException = null;
-		di.instanceFor(DiMessageProvider.class);
-
-		Test.startTest();
-		try {
-			di.setWithSharingInstanceTypeFor(DiMessageProvider.class, DiMessageProvider.SomeOtherImplementation.class);
-		}
-		catch (Exception ex) {
-			caughtException = ex;
-		}
-		Test.stopTest();
-
-		System.assertNotEquals(null, caughtException, 'An exception should have been caught.');
-		System.assert(caughtException instanceOf InstancesSource.InstanceTypeAlreadyDefinedException, 'caughtException should be an instance of InstancesSource.InstanceTypeAlreadyDefinedException class.');
-
-		InstancesSource.InstanceTypeAlreadyDefinedException typedException = (InstancesSource.InstanceTypeAlreadyDefinedException)caughtException;
-
-		System.assertEquals(expectedContractType, typedException.contractType, 'contractType should have the expected value.');
-		System.assertEquals(expectedInstanceType, typedException.instanceType, 'instanceType should have the expected value.');
-		System.assertEquals(expectedNewInstanceType, typedException.newInstanceType, 'newInstanceType should have the expected value.');
-	}
 
 	class NoImplementationClass {
 

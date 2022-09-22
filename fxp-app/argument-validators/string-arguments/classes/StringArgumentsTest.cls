@@ -11,7 +11,7 @@ public class StringArgumentsTest {
 
 		Test.startTest();
 		try {
-			Arguments.i.proceedIfItHasValue(' ', 'argumentNameWithBlankValue');
+			StringArguments.i.proceedIfItHasValue(' ', 'argumentNameWithBlankValue');
 		} catch (Exception e) {
 			caughtException = e;
 		}

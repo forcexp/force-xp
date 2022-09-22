@@ -1,12 +1,19 @@
 {
-  "packageDirectories": [
-    {
-      "path": "fxp-app",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "fxp-app",
+            "package": "fxp-framework",
+            "versionName": "FXP 1.4",
+            "versionNumber": "1.4.0.NEXT",
+            "default": true
+        }
+    ],
+    "name": "force-xp",
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "53.0",
+    "packageAliases": {
+        "fxp-framework": "0Ho7Q000000fxZRSAY",
+        "fxp-framework@1.4.0-1": "04t7Q000000UlSUQA0"
     }
-  ],
-  "name": "force-xp",
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "53.0"
 }

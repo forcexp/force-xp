@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Indicates the User has early access to features and changes not available to the rest of the user community.</description>
+    <isLicensed>false</isLicensed>
+    <label>Pilot User</label>
+</CustomPermission>
