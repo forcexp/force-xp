@@ -30,6 +30,28 @@ public abstract class Command {
 	public abstract class CommandException extends CustomException {
 	}
 
+	public interface CanExecute {
+		void execute();
+	}
+
+	public interface CanUndo {
+		void undo();
+	}
+
+	public interface CanExecuteInFuture {
+		void executeInFuture();
+	}
+
+	public interface UseRecord {
+		Boolean hasRecord();
+		void setRecord(SObject record);
+	}
+
+	public interface UseRecords {
+		Boolean hasRecords();
+		void setRecords(List<SObject> records);
+	}
+
 	/**
 	 * CommandAlreadyExecutedException should never be created outside FxpCommand class.
 	 */
